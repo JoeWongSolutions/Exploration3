@@ -1,0 +1,42 @@
+.mainNav {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: bisque;
+    padding: 10px;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.wrapper {
+    margin: 0px 20px;
+}
+
+.input {
+    padding-left: 40px;
+    display: inline-block;
+}
+
+.preview {
+    display: inline-block;
+    height: 400px;
+    vertical-align: top;
+    overflow-y: scroll;
+}
+
+.student-active, .book-available {
+    background-color: #7F7;
+}
+.student-active:hover, .book-available:hover {
+    background-color: #4F4;
+}
+
+.student-inactive, .book-unavailable {
+    background-color: #F77;
+}
+.student-inactive:hover, .book-unavailable:hover {
+    background-color: #F44;
+}
+

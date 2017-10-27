@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+Joe Wong
+CS4830 Challenge 4
+10/20/2017
+-->
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <title>Challenge4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    
+    <link rel="shortcut icon" href="#">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    
+    
+    <link rel="stylesheet" href="app.css">
+    <script src="controller.js"></script>
+    
+</head>
+<body ng-controller="MainController">
+    <div class="mainNav">
+        <div class="btn-group btn-group-lg">
+            <button type="button" class="btn btn-primary" ng-click="switch('Book')">Books</button>
+            <button type="button" class="btn btn-primary" ng-click="switch('Student')">Students</button>
+        </div>
+        <div>
+            <h1 class="center">{{title}} Management System</h1>
+        </div>
+    </div>
+    <div class="wrapper" ng-controller="StudentController" ng-show="stuModule">
+        <div class="col-lg-4 input">
+        <form ng-submit="addStudent()" class="form-horizontal">
+            <h3>New Student Form</h3>
+            <div class="form-group">
+                <label for="stuId" class="control-label col-sm-4">Student ID</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="stuId" type="number" name="stuId" min="1" max="99999999" required>
+                </div>
+                <label for="fname" class="control-label col-sm-4">First Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="fname" type="text" name="fname" required>
+                </div>
+                <br>
+                <label for="lname" class="control-label col-sm-4">Last Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="lname" type="text" name="lname" required>
+                </div>
+                <label for="phone" class="control-label col-sm-4">Phone</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="phone" type="tel" name="phone" pattern="[0-9]{10}" title="10 digit phone# no spaces or dashes">
+                </div>
+                <label for="addr" class="control-label col-sm-4">Address</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="addr" type="text" name="addr" size="40">
+                </div>
+                <label for="gpa" class="control-label col-sm-4">GPA</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="gpa" type="number" step=".01" name="gpa" min="0" max="4">
+                </div>
+                <label for="major" class="control-label col-sm-4">Major</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="major" type="text" name="major">
+                </div>
+                <label for="level" class="control-label col-sm-4">Level</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="level" name="level">
+                        <option value=""></option>
+                        <option value="Freshman">Freshman</option>
+                        <option value="Sophmore">Sophmore</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Add" class="btn btn-info pull-right form-control">
+            
+        </form>
+        </div>
+        <div class="preview col-lg-8">
+            <h3>Active Students: {{active}} / {{population}}</h3>
+            <table id="pTable" class="table table-responsive">
+                <tr>
+                    <th>StuID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>GPA</th>
+                    <th>Major</th>
+                    <th>Level</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th><button class="btn btn-xs btn-danger" ng-click="removeAll()">Clear All</button></th>
+                </tr>
+                <tr ng-repeat="student in students track by $index">
+                    <td>{{student.stuID}}</td>
+                    <td>{{student.fname}}</td>
+                    <td>{{student.lname}}</td>
+                    <td>{{student.gpa}}</td>
+                    <td>{{student.major}}</td>
+                    <td>{{student.level}}</td>
+                    <td>{{student.phone}}</td>
+                    <td>{{student.addr}}</td>
+                    <td ng-click="statusTog(student)" ng-model="student.status" class="student-{{student.status}}">{{student.status}}</td>
+                    <td>
+                        <span class="glyphicon glyphicon-remove" ng-click="remove(student)"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+<!--
+    <div class="wrapper" ng-controller="BookController" ng-show="bookModule">
+        <div class="col-lg-4 input">
+        <form ng-submit="addBook()" class="form-horizontal">
+            <h3>New Book Form</h3>
+            <div class="form-group">
+                <label for="ISBN" class="control-label col-sm-4">Book ISBN</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="ISBN" type="number" name="ISBN" min="1000000000000" max="9999999999999" required>
+                </div>
+                <label for="name" class="control-label col-sm-4">Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="name" type="text" name="name" required>
+                </div>
+                <label for="author" class="control-label col-sm-4">Author</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="author" type="text" name="author" required>
+                </div>
+                <label for="publisher" class="control-label col-sm-4">Publisher</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="publisher" type="text" name="publisher">
+                </div>
+                <label for="year" class="control-label col-sm-4">Year</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="year" type="number" name="year" min="1000" max="2018">
+                </div>
+                <label for="type" class="control-label col-sm-4">Type</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="type" name="type">
+                        <option value=""></option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-fiction">Non-fiction</option>
+                    </select>
+                </div>
+                <label for="edition" class="control-label col-sm-4">Edition</label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="edition" type="number" name="edition" size="4">
+                </div>
+            </div> 
+            <input type="submit" value="Add" class="btn btn-info pull-right form-control"> 
+        </form>
+        </div>
+        <div class="preview col-lg-8">
+            <h3>Available Books: {{available}} / {{population}}</h3>
+            <table id="pTable" class="table table-responsive">
+                <tr>
+                    <th>ISBN</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Year</th>
+                    <th>Type</th>
+                    <th>Edition</th>
+                    <th>Status</th>
+                    <th><button class="btn btn-xs btn-danger" ng-click="removeAll()">Clear All</button></th>
+                </tr>
+                <tr ng-repeat="book in books track by $index">
+                    <td>{{book.ISBN}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.publisher}}</td>
+                    <td>{{book.year}}</td>
+                    <td>{{book.type}}</td>
+                    <td>{{book.edition}}</td>
+                    <td ng-click="statusTog(book)" ng-model="book.status" class="book-{{book.status}}">{{book.status}}</td>
+                    <td>
+                        <span class="glyphicon glyphicon-remove" ng-click="remove(book)"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+-->
+    <div>
+        
+    </div>
+</body>
+</html>
