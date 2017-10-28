@@ -31,7 +31,6 @@ angular.module('studentApp', [])
         //Refresh is a helper function to refresh the view
         $scope.refresh = function () {
             $http.get(url).then(function(results){
-                console.log(results.data);
                 $scope.students = results.data ? results.data : [];
                 $scope.population = results.data.length ? results.data.length : 0;
                 
@@ -110,17 +109,11 @@ angular.module('studentApp', [])
         $scope.removeAll = function(){
             console.log("\n[Delete All from Collection]");
             
-            if(store) {
-                var request = store.clear()
-                    .then(function () {
-                        $scope.refresh();
-                        console.log("Successfully CLeared Collection: Students");
-                    });
-                request.onerror = function(event) {
-                    console.log("Collection Clear Failed:");
-                    console.dir(event);
-                };
-            }
+            $http.delete(url+"?stuID=all")
+                .then(function() {
+                $scope.refresh();
+                console.log("All students were deleted.");
+            });
         }
 
 }]);

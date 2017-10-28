@@ -70,11 +70,22 @@ app.put('/', (req, res) => {
 });
 
 app.delete('/*', (req, res) => {
-    db.collection('students').findOneAndDelete(
-        {stuID: req.query.stuID},
-        (err, result) => {
-            if(err) return res.send(err);
-            res.send({message: result + " was deleted successfully"});
-        }
-    );
+    if(req.query.stuID == "all"){
+        db.collection('students').deleteMany(
+            {},
+            (err, result) => {
+                if(err) return res.send(err);
+                res.send({message: result + " was deleted successfully"});
+            }
+        );
+    }
+    else {
+        db.collection('students').findOneAndDelete(
+            {stuID: req.query.stuID},
+            (err, result) => {
+                if(err) return res.send(err);
+                res.send({message: result + " was deleted successfully"});
+            }    
+        );
+    }
 });
