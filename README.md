@@ -7,6 +7,9 @@ Course: CS4830
 
 Date: 10/27/2017
 
+# Example of Running Server on my EC2
+[Joe's Student Management App](http://joewong.me/CS4830/Exploration3)
+
 # Sources
 * [Restful API in 10 minutes](https://www.codementor.io/olatundegaruba/nodejs-restful-apis-in-10-minutes-q0sgsfhbd)
 * [Dead Simple Guide for Nodejs, Express, and Mongo](https://closebrace.com/tutorials/2017-03-02/the-dead-simple-step-by-step-guide-for-front-end-developers-to-getting-up-and-running-with-nodejs-express-and-mongodb)
