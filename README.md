@@ -20,16 +20,16 @@ Date: 10/27/2017
 * [Postman](https://www.getpostman.com/)
 
 ## Components Explored
-[Install Mongodb](#install-mongodb)
-[Initial Setup](#initial-setup)
-[Creating Server.js](#creating-server.js)
-[Connecting to Mongo](#connecting-to-Mongo)
-[Expressjs CRUD](#expressjs-crud)
-[Install Foreverjs](#install-foreverjs)
-[Testing the Server](#testing-the-server)
+* [Install Mongodb](#install-mongodb)
+* [Initial Setup](#initial-setup)
+* [Creating Server.js](#creating-server.js)
+* [Connecting to Mongo](#connecting-to-Mongo)
+* [Expressjs CRUD](#expressjs-crud)
+* [Install Foreverjs](#install-foreverjs)
+* [Testing the Server](#testing-the-server)
 
-[Troubleshooting Tidbits](#troubleshooting-tidbits)
-[Journal](#journal)
+* [Troubleshooting Tidbits](#troubleshooting-tidbits)
+* [Journal](#journal)
 
 #### What this exploration covers:
 We will be going deeper into nodejs servers and looking at how to use Expressjs, Mongodb, and Foreverjs to create a backend on a Ubuntu EC2 instance. This guide will not be going into installing Node, NPM, and Express and assumes you are capable of installing these on your own or refer to my Exploration 2. I will also be using Javascript 2015 (ES6) extensively in my code because my first exploration was on this topic.
